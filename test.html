@@ -64,8 +64,264 @@
 // }
 // var arr=[3,4,13,14,15,17,20,22];
 // formatarr(arr)
+// function TreeNode(x) {
+//     this.val = x;
+//     this.left = null;
+//     this.right = null;
+// } 
+// function reConstructBinaryTree(pre, vin)
+// {
+// //  通过对比先序遍历和中序遍历，可以将其分成 左，中，右 三部分
+// // 先序遍历的第一个是中间部分
+// // 中序遍历的第一个 到 先序遍历的第一个值 为左边部分
+// // 剩下的为右边部分
+// // 这样就可以通过递归方式不断的分割，组成新的树
+// //     时间o(n)空间o(n)
+
+//     if(pre.length===0||vin.length===0) return null
+//     let root=new TreeNode(pre[0]),i=vin.indexOf(pre[0])
+//     root.left=reConstructBinaryTree(pre.slice(1,i+1), vin.slice(0,i))
+//     root.right=reConstructBinaryTree(pre.slice(i+1), vin.slice(i+1))
+//     return root
+// }
+// reConstructBinaryTree([1,2,3,4,5,6,7],[3,2,4,1,6,5,7])
+
+// let stack1=[],stack2=[6,7,8,9];
+// function push(node)
+// {
+//     // write code here
+//      stack1.push(node);
+// }
+// function pop()
+// {
+//     // write code here
+//      if(stack2.length){
+//         return stack2.pop();
+//     }else{
+//         while(stack1.length){
+//             stack2.push(stack1.pop());
+//         }
+//         return stack2.pop();
+//     }
+// }
+// push([1,2,3,4])
+// pop()
+// function Fibonacci(n)
+// {
+//     // write code here
+//     const dp = new Array(n + 1)
+//     dp[0] = 0
+//     dp[1] = 1
+//     for (let i= 2; i <= n; i++) {
+//         dp[i] = dp[i - 1] + dp[i - 2]
+//     }
+//     return dp[n]
+// }
+// Fibonacci(4)
+// function ListNode(x){
+//     this.val = x;
+//     this.next = null;
+// }
+// function Merge(pHead1, pHead2)
+// {
+//     // write code here
+//     if(!pHead1) {
+//         return pHead2
+//     }else if(!pHead2){
+//         return pHead1
+//     }
+//     let head=new ListNode(-1)
+//     let node=head
+//     while(pHead1&&pHead2){
+//         if(pHead1.val<=pHead2.val){
+//             node.next=pHead1
+//             pHead1=pHead1.next
+//         }else{
+//             node.next=pHead2
+//             pHead2=pHead2.next
+//         }
+//        node= node.next
+//     }
+//     if(pHead1){
+//         node.next=pHead1
+//     }
+//       if(pHead2){
+//         node.next=pHead2
+//     }
+//     return head.next
+// }
+// console.log(Merge(ListNode("{1,3,4}"),ListNode("{5,6,8}")))
+
+// function printMatrix(matrix)
+// {
+
+//     if(matrix.length==0) return []
+//     const res=[]
+// //     行：top,bottom 列：left,right
+//     let top=0;
+//     let bottom=matrix[0].length-1;
+//     let left=0;
+//     let right=matrix.length-1;
+//     while(top<bottom && left<right){
+//         for(let i=left;i<right;i++) res.push(matrix[top][i])//上层
+//         for(let i=top;i<bottom;i++) res.push(matrix[i][right])//右层
+//         for(let i=right;i>left;i--) res.push(matrix[bottom][i])//下层
+//         for(let i=bottom;i>top;i--) res.push(matrix[i][left])//左层
+//         left++;
+//         top++;
+//         right--;
+//         bottom--;
+//     }
+//     if(top==bottom){
+//         for(let i=left;i<=right;i++){
+//             res.push(matrix[top][i])
+//         }
+//     }else if(left==right){
+//         for(let i=top;i<=bottom;i++){
+//             res.push(matrix[i][left])
+//         }
+//     }
+//     return res
+// }
+// printMatrix([[1,2],[3,4]])
 
 
+// function Permutation(str)
+// {
+//      var res = new Set();
+//     var path = [];
+//     var visited = [];
+//     dfsHelper([...str], path, res,visited);
+//     return Array.from(res);
+// }
+// function dfsHelper(arr, path, res,visited) {
+//     if (arr.length === path.length) { //说明走到底(叶子节点)
+//         res.add(path.join(''))
+//         return;
+//     }
+
+//     for (let i = 0; i < arr.length; i++) {
+//         if(visited[i]){
+//             continue;
+//         }
+//         visited[i] = true;
+//         //进入下一层
+//         path.push(arr[i]);
+//         dfsHelper(arr, path, res,visited);
+//         path.pop();
+//         visited[i] = false;
+//     }
+
+// }
+
+
+// function PrintMinNumber(numbers)
+// {
+//     // write code here
+//        numbers.sort((a, b) => {
+//         const s1 = a + "" + b;
+//         const s2 = b + "" + a;
+
+//         if (s1 < s2) return;
+//         if (s1 > s2) return;
+//         return 0;
+//     });
+//     return numbers.join("");
+// }
+// console.log(PrintMinNumber([3,32,321]))
+
+// function GetUglyNumber_Solution(index)
+// {
+//     const res=new Array(index)
+//     res[0]=1
+//     let ptr2=0,ptr3=0,ptr5=0
+//     for(let i=1;i<index;++i){
+//         res[i]=Math.min(res[ptr2]*2,res[ptr3]*3,res[ptr5]*5)
+//         if(res[i]===res[ptr2]*2){
+//             ++ptr2
+//         }
+//          if(res[i]===res[ptr3]*3){
+//             ++ptr3
+//         }
+//          if(res[i]===res[ptr5]*5){
+//             ++ptr5
+//         }
+//     }
+//     return res[index-1]
+// }
+// console.log(GetUglyNumber_Solution(12))
+
+// function LeftRotateString(str, n)
+// {
+//     // write code here
+//     // let arr=new Array(str)
+//     // let tempArr=arr
+//     // tempArr.slice(0,n)
+//     // arr.push(tempArr)
+//     let len=str.length
+//       if(!str || len<=0){
+//         return "";
+//     }
+//     n = n > len?len:n;
+//     return str.slice(n,len)+str.slice(0,n);
+// }
+// console.log(LeftRotateString("abcXYZdef",3))
+// function ReverseSentence(str)
+// {
+//     // write code here
+//     strArr=str.split(' ')
+//     return strArr.reverse().join(' ')
+// }
+// console.log(ReverseSentence("nowcoder. a am I"))
+
+
+
+// function duplicate(numbers, duplication)
+// {
+//     // write code here
+//     //这里要特别注意~找到任意重复的一个值并赋值到duplication[0]
+//     //函数返回True/False
+//     let temp=[]
+//     for(let i=0;i<numbers.length;i++){
+        
+//     }
+// }
+
+function match(s, pattern)
+{
+    // write code here
+    //法二：动态规划
+    //dp[i][j]表示匹配串s的前i个字符与模式串p的前j个字符是否匹配
+    const dp=[];
+    for(let i=0;i<=s.length;i++){
+        dp[i]=[];
+        for(let j=0;j<=pattern.length;j++){
+            if(i===0&&j===0){
+                dp[i][j]=1;
+            }else if(j===0){
+                dp[i][j]=0;
+            }else{
+                //i跟j代表的含义是前多少个字符。所以当前考虑的模式串的最后一个字符下标为j-1
+                if(pattern[j-1]!=="*"){
+                    if(i>=1&&(s[i-1]===pattern[j-1]||pattern[j-1]===".")){
+                        dp[i][j]=dp[i-1][j-1];
+                    }
+                }else{
+                    if(j>=2){
+                        dp[i][j]=dp[i][j-2];
+                    }
+                    if(i>=1&&j>=2&&(s[i-1]===pattern[j-2]||pattern[j-2]===".")){
+                        dp[i][j]=dp[i][j]||dp[i-1][j];
+                    }
+                }
+            }
+             
+        }
+    }
+    return dp[s.length][pattern.length];
+     
+}
+console.log(match("aaa","a*a"))
     </script>
 </body>
 
