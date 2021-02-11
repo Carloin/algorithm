@@ -1,24 +1,36 @@
 var isValid = function(s) {
-    const n = s.length;
-    if (n % 2 === 1) {
-        return false;
-    }
-    const pairs = new Map([
-        [')', '('],
-        [']', '['],
-        ['}', '{']
-    ]);
-    const stk = [];
-    s.split('').forEach(ch => {
-        if (pairs.has(ch)) {
-            if (!stk.length || stk[stk.length - 1] !== pairs.get(ch)) {
-                return false;
-            }
-            stk.pop();
-        } 
-        else {
-            stk.push(ch);
-        }
-    });
-    return !stk.length;
+    let arr = []
+   let len = s.length
+   if (len%2) return false
+   for (let i = 0; i < len; i++) {
+       let letter = s[i]
+       switch(letter) {
+           case "(": {
+               arr.push(letter)
+               break;
+           }
+           case "[": {
+               arr.push(letter)
+               break;
+           }
+           case "{": {
+               arr.push(letter)
+               break;
+           }
+           case ")": {
+               if (arr.pop() !== "(") return false
+               break;
+           }
+           case "]": {
+                if (arr.pop() !== "[") return false
+               break;
+           }
+           case "}": {
+               if (arr.pop() !== "{") return false
+               break;
+           }
+       }
+   }
+   return !arr.length
+   
 };
